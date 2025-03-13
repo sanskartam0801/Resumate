@@ -3,20 +3,25 @@
 // Inspired by react-hot-toast library
 import * as React from "react"
 
-import type {
-  ToastActionElement,
-  ToastProps,
-} from "@/components/ui/sonner"
+// Define ToastProps and ToastActionElement locally if they are not exported from the module
+interface ToastProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  // Add other necessary properties here
+}
+
+type ToastActionElement = React.ReactElement;
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000
 
 type ToasterToast = ToastProps & {
-  id: string
-  title?: React.ReactNode
-  description?: React.ReactNode
-  action?: ToastActionElement
-}
+  id: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: ToastActionElement;
+  variant?: "default" | "destructive"; // Add the variant property
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const actionTypes = {
@@ -159,7 +164,7 @@ function toast({ ...props }: Toast) {
       ...props,
       id,
       open: true,
-      onOpenChange: (open) => {
+      onOpenChange: (open: boolean) => {
         if (!open) dismiss()
       },
     },
