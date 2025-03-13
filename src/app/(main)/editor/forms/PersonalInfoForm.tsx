@@ -70,6 +70,9 @@ export default function PersonalInfoForm({
                       ref={photoInputRef}
                     />
                   </FormControl>
+                  {value && typeof value === "object" && "name" in value && (
+                    <p className="text-sm text-gray-500">{value.name}</p> // Show selected file name
+                  )}
                   <Button
                     variant="secondary"
                     type="button"
